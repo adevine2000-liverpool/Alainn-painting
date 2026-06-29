@@ -9,12 +9,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Dancing+Script:wght@500;600&display=swap');
 
 /* ─────────────────────────────────────────────
-   FORCE LIGHT MODE — always, on every device
-   Prevents the browser or OS dark mode from
-   overriding any colours on this site.
+   FORCE LIGHT MODE — permanent, on every device
+   ───────────────────────────────────────────────
+   Windows/macOS/iOS dark mode must never affect
+   this site. We lock it three ways:
+
+   1. color-scheme: light  — tells the browser's
+      rendering engine this document is light-only.
+      "only" keyword explicitly opts out of auto
+      dark adaptation.
+
+   2. Hardcoded hex on html + body — bypasses any
+      UA stylesheet dark-mode injection that runs
+      before CSS custom properties resolve.
+
+   3. forced-color-adjust: none — prevents Windows
+      High Contrast / Forced Colours mode from
+      repainting our palette.
    ───────────────────────────────────────────── */
-:root {
+
+:root,
+html {
   color-scheme: light only;
+}
+
+html {
+  background-color: #FBF2EC; /* --cream */
+  color: #4A1608;            /* --terra-rich */
+  forced-color-adjust: none;
+  -ms-high-contrast: none;
+}
+
+body {
+  background-color: #FBF2EC; /* --cream */
+  color: #4A1608;            /* --terra-rich */
+  forced-color-adjust: none;
 }
 
 /* ─────────────────────────────────────────────
@@ -106,8 +135,6 @@ html {
 body {
   font-family: var(--font-serif);
   font-size: var(--text-base);
-  background-color: var(--cream);
-  color: var(--terra-rich);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
